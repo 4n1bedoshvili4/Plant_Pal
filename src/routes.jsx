@@ -1,0 +1,76 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Search from "./pages/Search/Search";
+import MyPlants from "./pages/MyPlants/MyPlants";
+import Reminders from "./pages/Reminders/Reminders";
+import Profile from "./pages/Profile/Profile";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
+function AppRoutes() {
+
+    return (
+
+        <BrowserRouter>
+
+            <Routes>
+
+                <Route 
+                    path="/" 
+                    element={<Login />} 
+                />
+
+                <Route 
+                    path="/register" 
+                    element={<Register />} 
+                />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/search"
+                    element={
+                        <ProtectedRoute>
+                            <Search />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/plants"
+                    element={
+                        <ProtectedRoute>
+                            <MyPlants />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/reminders"
+                    element={
+                        <ProtectedRoute>
+                            <Reminders />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <Profile />
+                        </ProtectedRoute>
+                    }
+                /> 
+            </Routes>
+
+        </BrowserRouter>
+
+    );
+}
+
+
+export default AppRoutes;

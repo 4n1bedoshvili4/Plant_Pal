@@ -1,0 +1,177 @@
+.container {
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--background);
+
+}
+
+
+.card {
+
+    width: 420px;
+
+    background: var(--white);
+
+    padding: 45px;
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    text-align: center;
+
+}
+
+
+.logo {
+
+    width: 80px;
+    height: 80px;
+
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--mint);
+
+    border-radius: 50%;
+
+    font-size: 40px;
+
+}
+
+
+h1 {
+
+    margin-top: 20px;
+
+    color: var(--dark-green);
+
+    font-size: 30px;
+
+}
+
+
+.subtitle {
+
+    margin: 10px 0 30px;
+
+    color: #6b7280;
+
+}
+
+
+
+.inputGroup {
+
+    text-align: left;
+
+    margin-bottom: 20px;
+
+}
+
+
+.inputGroup label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+}
+
+
+.inputGroup input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    border: 1px solid #ddd;
+
+    font-size: 15px;
+
+}
+
+
+.inputGroup input:focus {
+
+    outline: none;
+
+    border-color: var(--primary-green);
+
+}
+
+
+
+.button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--primary-green);
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+}
+
+
+.button:hover {
+
+    background: var(--dark-green);
+
+}
+
+.button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+.login {
+
+    margin-top: 25px;
+
+    font-size: 14px;
+
+}
+
+
+.login span {
+
+    color: var(--primary-green);
+
+    font-weight: 600;
+
+    margin-left: 5px;
+
+}
+
+.error {
+
+    color: #dc2626;
+
+    font-size:14px;
+
+    margin-bottom:15px;
+
+}

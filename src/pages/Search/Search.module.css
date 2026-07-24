@@ -1,0 +1,72 @@
+.searchPage {
+
+    padding:40px;
+
+    min-height:100vh;
+
+    background:#f4f8f2;
+
+}
+
+
+.searchPage h1 {
+
+    color:#2f6b45;
+
+    margin-bottom:25px;
+
+}
+
+
+.searchBox {
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:40px;
+
+}
+
+
+.searchBox input {
+
+    width:300px;
+
+    padding:14px 18px;
+
+    border-radius:15px;
+
+    border:1px solid #ddd;
+
+    font-size:16px;
+
+}
+
+
+.searchBox button {
+
+    padding:14px 25px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#4f8f5b;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+
+.plantGrid {
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+
+    gap:25px;
+
+}

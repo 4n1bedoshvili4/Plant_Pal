@@ -1,0 +1,38 @@
+.brand {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: var(--dark-green);
+
+    text-decoration: none;
+
+}
+
+
+.icon {
+
+    font-size: 32px;
+
+}
+
+.brand:hover {
+
+    opacity: 0.8;
+
+}
+
+.brand:hover .icon {
+
+    transform: rotate(-10deg);
+
+}
+
+.icon {
+    font-size:32px;
+    transition:0.3s;
+}
