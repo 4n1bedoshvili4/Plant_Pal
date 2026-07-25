@@ -30,6 +30,7 @@ function Login() {
 
             navigate("/dashboard");
 
+        // eslint-disable-next-line no-unused-vars
         } catch (err) {
 
             setError("Invalid email or password.");
