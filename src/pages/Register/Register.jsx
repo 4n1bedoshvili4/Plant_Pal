@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { registerUser } from "../../services/authService";
-
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import Logo from "../../components/Logo/Logo";
-
 import styles from "./Register.module.css";
-
+import { createUserProfile } from "../../services/firestoreService";
 
 function Register() {
 
@@ -106,10 +103,16 @@ function Register() {
             setLoading(true);
 
 
-            await registerUser(email, password);
+            const userCredential = await registerUser(email, password);
 
+                await createUserProfile(
+                    userCredential.user,
+                    firstName,
+                    lastName,
+                    age
+                );
 
-            navigate("/dashboard");
+                navigate("/dashboard");
 
 
         } catch(err) {
