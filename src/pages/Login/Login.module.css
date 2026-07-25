@@ -3,7 +3,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     background: var(--background);
+
+    position: relative;
+    overflow: hidden;
 }
 
 
@@ -14,8 +18,31 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     text-align: center;
+    opacity: 0;
+    position: relative;
+    z-index: 2;
+    animation: cardAppear 0.8s ease-out forwards;
 }
 
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
 
 .logo {
     width: 80px;
@@ -32,7 +59,7 @@
 }
 
 
-h1 {
+.title {
     margin-top: 20px;
     color: var(--dark-green);
     font-size: 32px;
@@ -109,4 +136,145 @@ h1 {
     color: var(--primary-green);
     font-weight: 600;
     cursor: pointer;
+}
+
+.error {
+    color: #dc2626;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.backgroundBlob {
+
+    position: absolute;
+
+    filter: blur(45px);
+
+    opacity: 0.55;
+
+    z-index: 0;
+
+    animation: floatBlob 20s ease-in-out infinite;
+
+}
+
+
+
+.blob1 {
+
+    width: 380px;
+    height: 320px;
+
+    background: #b7e4c7;
+
+    top: -120px;
+    left: -120px;
+
+
+    border-radius:
+    60% 40% 70% 30%
+    /
+    50% 60% 40% 50%;
+
+}
+
+
+
+.blob2 {
+
+    width: 320px;
+    height: 380px;
+
+    background: #d8f3dc;
+
+
+    right: -140px;
+    top: 100px;
+
+
+    border-radius:
+    40% 60% 30% 70%
+    /
+    60% 40% 70% 30%;
+
+
+    animation-delay: -5s;
+
+}
+
+
+
+.blob3 {
+
+    width: 300px;
+    height: 260px;
+
+
+    background: #95d5b2;
+
+
+    bottom: -100px;
+    left: 30%;
+
+
+    border-radius:
+    70% 30% 50% 50%
+    /
+    40% 60% 40% 60%;
+
+
+    animation-delay: -10s;
+
+}
+
+
+
+.blob4 {
+
+    width: 250px;
+    height: 300px;
+
+
+    background: #c7ead4;
+
+
+    bottom: 10%;
+    right: 10%;
+
+
+    border-radius:
+    50% 50% 70% 30%
+    /
+    60% 40% 50% 50%;
+
+
+    animation-delay: -15s;
+
+}
+
+
+
+@keyframes floatBlob {
+
+    0% {
+
+        transform: translate(0,0) rotate(0deg);
+
+    }
+
+
+    50% {
+
+        transform: translate(35px,-25px) rotate(10deg);
+
+    }
+
+
+    100% {
+
+        transform: translate(0,0) rotate(0deg);
+
+    }
+
 }

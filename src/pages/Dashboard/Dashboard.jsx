@@ -2,10 +2,30 @@ import styles from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Brand from "../../components/Brand/Brand";
+import { useEffect, useState } from "react";
+import { getUserProfile } from "../../services/firestoreService";
+
 
 function Dashboard() {
 
     const { user, loading } = useAuth();
+    const [profile, setProfile] = useState(null);
+
+    useEffect(() => {
+
+    async function loadProfile() {
+
+        if (!user) return;
+
+        const data = await getUserProfile(user.uid);
+
+        setProfile(data);
+
+    }
+
+    loadProfile();
+
+}, [user]);
 
     if (loading) {
     return <h1>Loading...</h1>;
@@ -58,9 +78,9 @@ function Dashboard() {
             <main className={styles.content}>
 
 
-                 <h1>
-                    Good morning, {user?.email} 🌱
-                </h1>
+            <h1>
+                Good morning, {profile?.firstName || "Plant Lover"} 🌱
+            </h1>
 
                 <p className={styles.subtitle}>
                     Let's take care of your plants today

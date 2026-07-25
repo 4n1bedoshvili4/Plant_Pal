@@ -1,5 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { getDoc } from "firebase/firestore";
 
 export async function createUserProfile(user, firstName, lastName, age) {
 
@@ -12,5 +13,21 @@ export async function createUserProfile(user, firstName, lastName, age) {
         createdAt: new Date()
 
     });
+
+}
+
+export async function getUserProfile(uid) {
+
+    const docRef = doc(db, "users", uid);
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+
+        return docSnap.data();
+
+    }
+
+    return null;
 
 }
