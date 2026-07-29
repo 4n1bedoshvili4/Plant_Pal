@@ -1,72 +1,234 @@
 .searchPage {
 
-    padding:40px;
-
     min-height:100vh;
 
-    background:#f4f8f2;
+    background:#f6f4e8;
+
+    padding-bottom:60px;
 
 }
 
 
-.searchPage h1 {
 
-    color:#2f6b45;
+/* HEADER */
 
-    margin-bottom:25px;
+.header {
 
-}
+    text-align:center;
 
-
-.searchBox {
-
-    display:flex;
-
-    gap:15px;
-
-    margin-bottom:40px;
+    padding:45px 20px 35px;
 
 }
 
 
-.searchBox input {
 
-    width:300px;
+.header h1 {
 
-    padding:14px 18px;
+    color:#214d3a;
 
-    border-radius:15px;
+    font-size:36px;
 
-    border:1px solid #ddd;
+    margin-bottom:10px;
+
+}
+
+
+
+.header p {
+
+    color:#68766d;
 
     font-size:16px;
 
 }
 
 
+
+
+
+/* SEARCH */
+
+.searchBox {
+
+    margin:30px auto 0;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+}
+
+
+
+.searchBox input {
+
+
+    width:380px;
+
+    height:50px;
+
+    padding:0 20px;
+
+    border-radius:25px;
+
+    border:1px solid #ddd;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+
+
+.searchBox input:focus {
+
+    border-color:#4daa57;
+
+}
+
+
+
 .searchBox button {
 
-    padding:14px 25px;
+
+    height:50px;
+
+    padding:0 28px;
 
     border:none;
 
-    border-radius:15px;
+    border-radius:25px;
 
-    background:#4f8f5b;
+    background:#4daa57;
 
     color:white;
+
+    font-weight:600;
 
     cursor:pointer;
 
 }
 
 
+
+
+
+/* POPULAR */
+
+.popular {
+
+    max-width:1100px;
+
+    margin:25px auto 40px;
+
+    padding:0 30px;
+
+}
+
+
+
+.popular h2,
+.results h2 {
+
+    color:#214d3a;
+
+    font-size:22px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+.tags {
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.tags button {
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:white;
+
+    color:#214d3a;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+
+}
+
+
+
+.tags button:hover {
+
+    background:#b5dda4;
+
+}
+
+
+
+
+
+/* RESULTS */
+
+
+.results {
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+    padding:0 30px;
+
+}
+
+
+
+
 .plantGrid {
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    grid-template-columns:
 
-    gap:25px;
+    repeat(auto-fill,minmax(230px,1fr));
+
+
+    gap:18px;
+
+}
+
+
+
+
+
+.loading,
+.noResults {
+
+    text-align:center;
+
+    margin-top:50px;
+
+    color:#555;
 
 }

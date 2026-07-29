@@ -1,33 +1,34 @@
-.plantCard {
+.card {
+
+    width:240px;
 
     background:white;
 
-    border-radius:20px;
+    border-radius:24px;
 
     overflow:hidden;
 
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-
-    width:260px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
 
     transition:0.3s;
 
 }
 
 
-.plantCard:hover {
+.card:hover {
 
-    transform:translateY(-5px);
+    transform:translateY(-8px);
 
 }
 
 
 
-.plantImage {
+.image,
+.noImage {
 
     width:100%;
 
-    height:180px;
+    height:190px;
 
     object-fit:cover;
 
@@ -35,17 +36,35 @@
 
 
 
-.plantInfo {
+.noImage {
 
-    padding:20px;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#dff0d8;
+
+    font-size:55px;
 
 }
 
 
 
-.plantInfo h3 {
+.info {
+
+    padding:19px;
+
+}
+
+
+
+.info h3 {
 
     color:#2f6b45;
+
+    font-size:20px;
 
     margin-bottom:8px;
 
@@ -55,9 +74,64 @@
 
 .scientific {
 
+    color:#777;
+
     font-style:italic;
 
-    color:#777;
+    font-size:14px;
+
+}
+
+
+
+.actions {
+
+    margin-top:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+
+.detailsButton,
+.addButton {
+
+    width:100%;
+
+    padding:12px;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+}
+
+
+
+.detailsButton {
+
+    background:#e8f5e9;
+
+    color:#2f6b45;
+
+    text-decoration:none;
+
+}
+
+
+
+.detailsButton:hover {
+
+    background:#d1ebd2;
 
 }
 
@@ -65,20 +139,18 @@
 
 .addButton {
 
-    margin-top:15px;
-
-    width:100%;
-
-    padding:10px;
-
     border:none;
 
-    border-radius:12px;
-
-    background:#4f8f5b;
+    background:#4daa57;
 
     color:white;
 
-    cursor:pointer;
+}
+
+
+
+.addButton:hover {
+
+    background:#397d43;
 
 }
