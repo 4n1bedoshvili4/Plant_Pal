@@ -7,6 +7,7 @@ import MyPlants from "./pages/MyPlants/MyPlants";
 import Reminders from "./pages/Reminders/Reminders";
 import Profile from "./pages/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 function AppRoutes() {
 
@@ -65,6 +66,10 @@ function AppRoutes() {
                         </ProtectedRoute>
                     }
                 /> 
+                <Route
+                    path="/reset-password"
+                    element={<ResetPassword />}
+                />
             </Routes>
 
         </BrowserRouter>

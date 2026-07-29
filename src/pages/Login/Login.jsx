@@ -107,6 +107,13 @@ function Login() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        <div className={styles.forgotPassword}>
+
+                        <Link to="/reset-password">
+                            Forgot Password?
+                        </Link>
+
+                    </div>
 
                     </div>
 
