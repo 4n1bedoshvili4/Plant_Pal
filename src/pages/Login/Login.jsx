@@ -4,6 +4,7 @@ import { loginUser } from "../../services/authService";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import Logo from "../../components/Logo/Logo";
 import styles from "./Login.module.css";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 function Login() {
 
@@ -11,6 +12,7 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -101,12 +103,24 @@ function Login() {
                             Password
                         </label>
 
-                        <input
-                            type="password"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div className={styles.passwordWrapper}>
+
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+
+                            <button
+                                type="button"
+                                className={styles.eyeButton}
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <FiEyeOff /> : <FiEye />}
+                            </button>
+
+                        </div>
                         <div className={styles.forgotPassword}>
 
                         <Link to="/reset-password">
