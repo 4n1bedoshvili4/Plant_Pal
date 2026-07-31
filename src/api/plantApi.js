@@ -88,3 +88,17 @@ export async function searchPlants(query) {
     }
 
 }
+
+export async function getPlantDetails(pageid) {
+
+    const response = await fetch(
+
+        `https://en.wikipedia.org/w/api.php?action=query&pageids=${pageid}&prop=extracts|pageimages&piprop=original|thumbnail&pithumbsize=900&explaintext=true&exintro=false&format=json&origin=*`
+
+    );
+
+    const data = await response.json();
+
+    return data.query.pages[pageid];
+
+}

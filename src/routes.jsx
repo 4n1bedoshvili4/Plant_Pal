@@ -8,6 +8,7 @@ import Reminders from "./pages/Reminders/Reminders";
 import Profile from "./pages/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import PlantDetails from "./pages/PlantDetails/PlantDetails";
 
 function AppRoutes() {
 
@@ -69,6 +70,14 @@ function AppRoutes() {
                 <Route
                     path="/reset-password"
                     element={<ResetPassword />}
+                />
+                <Route
+                    path="/plant/:pageid"
+                    element={
+                        <ProtectedRoute>
+                            <PlantDetails />
+                        </ProtectedRoute>
+                    }
                 />
             </Routes>
 
