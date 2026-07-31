@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { searchPlants } from "../../api/plantApi";
+import { useNavigate } from "react-router-dom";
 
 import PlantCard from "../../components/PlantCard/PlantCard";
 
@@ -18,7 +19,7 @@ function Search() {
 
     const [searched, setSearched] = useState(false);
 
-
+    const navigate = useNavigate();
 
     const popularPlants = [
 
@@ -177,6 +178,18 @@ function Search() {
             <section className={styles.header}>
 
 
+                <div className={styles.topBar}>
+
+                    <button
+                        className={styles.backButton}
+                        onClick={() => navigate("/dashboard")}
+                    >
+                        ← Back to Dashboard
+                    </button>
+
+                </div>
+
+
                 <h1>
                     Explore Plants
                 </h1>
@@ -188,36 +201,23 @@ function Search() {
 
 
 
-
-
                 <form
                     className={styles.searchBox}
                     onSubmit={handleSearch}
                 >
 
-
                     <input
-
                         type="text"
-
                         placeholder="Search for a plant..."
-
                         value={query}
-
-                        onChange={(e)=>
+                        onChange={(e) =>
                             setQuery(e.target.value)
                         }
-
                     />
 
-
-
                     <button type="submit">
-
                         Search
-
                     </button>
-
 
                 </form>
 
@@ -228,60 +228,38 @@ function Search() {
 
 
 
-
-
-
             <section className={styles.popular}>
-
 
                 <h2>
                     Popular Plants
                 </h2>
 
-
-
                 <div className={styles.tags}>
 
-
                     {
-                        popularPlants.map((plant)=>(
-
+                        popularPlants.map((plant) => (
 
                             <button
-
                                 key={plant.name}
-
                                 onClick={() => {
 
-                                    setQuery(
-                                        plant.search
-                                    );
+                                    setQuery(plant.search);
 
-                                    loadPlants(
-                                        plant.search
-                                    );
+                                    loadPlants(plant.search);
 
                                 }}
-
                             >
 
                                 {plant.name}
 
                             </button>
 
-
                         ))
                     }
 
-
                 </div>
 
-
             </section>
-
-
-
-
 
 
 
@@ -301,57 +279,34 @@ function Search() {
 
 
 
-
-
-
-
             {
                 !loading && plants.length > 0 && (
 
-
                     <section className={styles.results}>
-
 
                         <h2>
                             Plant Results
                         </h2>
 
-
-
-
-
                         <div className={styles.plantGrid}>
 
-
                             {
-                                plants.map((plant)=>(
-
+                                plants.map((plant) => (
 
                                     <PlantCard
-
                                         key={plant.pageid}
-
                                         plant={plant}
-
                                     />
-
 
                                 ))
                             }
 
-
                         </div>
-
 
                     </section>
 
-
                 )
             }
-
-
-
-
 
 
 
@@ -362,26 +317,20 @@ function Search() {
                 !loading &&
                 plants.length === 0 && (
 
-
                     <section className={styles.noResults}>
-
 
                         <h2>
                             No plants found
                         </h2>
 
-
                         <p>
                             Try searching for another plant.
                         </p>
 
-
                     </section>
-
 
                 )
             }
-
 
 
         </main>

@@ -232,3 +232,47 @@
     color:#555;
 
 }
+
+.topBar {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: flex-start;
+
+    margin-bottom: 25px;
+
+}
+
+.backButton {
+
+    background: rgba(255,255,255,.9);
+
+    color: #214d3a;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 10px 18px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+.backButton:hover {
+
+    background: #b5dda4;
+
+    color: #214d3a;
+
+    transform: translateY(-2px);
+
+}
