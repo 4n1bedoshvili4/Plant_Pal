@@ -1,109 +1,262 @@
-const STORAGE_KEY = "myPlants";
+import {
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc,
+    query,
+    where
+} from "firebase/firestore";
 
-
-
-export function getMyPlants() {
-
-    const plants = localStorage.getItem(STORAGE_KEY);
-
-    return plants
-        ? JSON.parse(plants)
-        : [];
-
-}
-
-
-
-
-
-export function isPlantSaved(pageid) {
-
-    return getMyPlants().some(
-
-        plant => plant.pageid === pageid
-
-    );
-
-}
+import { db, auth } from "../firebase/firebase";
 
 
 
 
-
-export function addPlant(plant) {
-
-
-    const plants = getMyPlants();
+export async function getMyPlants() {
 
 
-    if(!isPlantSaved(plant.pageid)) {
+    const user = auth.currentUser;
 
 
-        plants.push(plant);
+    if(!user) {
 
-
-        localStorage.setItem(
-
-            STORAGE_KEY,
-
-            JSON.stringify(plants)
-
-        );
-
-    }
-
-}
-
-
-
-
-
-export function removePlant(pageid) {
-
-
-    const plants = getMyPlants();
-
-
-    const updatedPlants = plants.filter(
-
-        plant => plant.pageid !== pageid
-
-    );
-
-
-    localStorage.setItem(
-
-        STORAGE_KEY,
-
-        JSON.stringify(updatedPlants)
-
-    );
-
-}
-
-
-
-
-
-export function togglePlant(plant) {
-
-
-    if(isPlantSaved(plant.pageid)) {
-
-
-        removePlant(plant.pageid);
-
-
-        return false;
-
+        return [];
 
     }
 
 
-    addPlant(plant);
+
+    const plantsRef = collection(
+
+        db,
+
+        "users",
+
+        user.uid,
+
+        "plants"
+
+    );
 
 
-    return true;
 
+    const snapshot = await getDocs(plantsRef);
+
+
+
+    return snapshot.docs.map(item => ({
+
+        id: item.id,
+
+        ...item.data()
+
+    }));
+
+}
+
+
+
+
+
+
+
+export async function isPlantSaved(pageid) {
+
+
+    const user = auth.currentUser;
+
+
+    if(!user) {
+
+        return {
+
+            saved:false,
+
+            id:null
+
+        };
+
+    }
+
+
+
+    const plantsRef = collection(
+
+        db,
+
+        "users",
+
+        user.uid,
+
+        "plants"
+
+    );
+
+
+
+    const q = query(
+
+        plantsRef,
+
+        where(
+
+            "pageid",
+
+            "==",
+
+            pageid
+
+        )
+
+    );
+
+
+
+    const snapshot = await getDocs(q);
+
+
+
+    if(snapshot.empty) {
+
+
+        return {
+
+            saved:false,
+
+            id:null
+
+        };
+
+
+    }
+
+
+
+    return {
+
+        saved:true,
+
+        id:snapshot.docs[0].id
+
+    };
+
+
+}
+
+
+
+
+
+
+
+
+
+export async function addPlant(plant) {
+
+
+    const user = auth.currentUser;
+
+
+    if(!user) {
+
+        return null;
+
+    }
+
+
+
+    const alreadySaved = await isPlantSaved(
+
+        plant.pageid
+
+    );
+
+
+
+    if(alreadySaved.saved) {
+
+
+        return alreadySaved.id;
+
+    }
+
+
+
+    const plantsRef = collection(
+
+        db,
+
+        "users",
+
+        user.uid,
+
+        "plants"
+
+    );
+
+
+
+    const newPlant = await addDoc(
+
+        plantsRef,
+
+        {
+
+            pageid: plant.pageid,
+
+            title: plant.title,
+
+            image: plant.thumbnail?.source || "",
+
+            extract: plant.extract || ""
+
+        }
+
+    );
+
+
+
+    return newPlant.id;
+
+}
+
+
+
+
+
+
+
+export async function removePlant(plantId) {
+
+
+    const user = auth.currentUser;
+
+
+    if(!user) {
+
+        return;
+
+    }
+
+
+
+    await deleteDoc(
+
+        doc(
+
+            db,
+
+            "users",
+
+            user.uid,
+
+            "plants",
+
+            plantId
+
+        )
+
+    );
 
 }

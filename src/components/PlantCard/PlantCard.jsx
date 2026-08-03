@@ -14,32 +14,60 @@ import styles from "./PlantCard.module.css";
 
 function PlantCard({ plant }) {
 
+
     const [saved, setSaved] = useState(false);
+
+    const [savedPlantId, setSavedPlantId] = useState(null);
 
     const [showToast, setShowToast] = useState(false);
 
 
 
+
+
     useEffect(() => {
 
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setSaved(
 
-            isPlantSaved(plant.pageid)
-
-        );
-
-    }, [plant]);
+        async function checkSaved() {
 
 
+            const result = await isPlantSaved(
+
+                plant.pageid
+
+            );
+
+
+            setSaved(result.saved);
+
+            setSavedPlantId(result.id);
+
+
+        }
+
+
+        checkSaved();
+
+
+    }, [plant.pageid]);
 
 
 
-    function handleAddPlant() {
 
-        addPlant(plant);
+
+
+
+
+    async function handleAddPlant() {
+
+
+        const id = await addPlant(plant);
+
 
         setSaved(true);
+
+        setSavedPlantId(id);
+
 
         setShowToast(true);
 
@@ -51,21 +79,38 @@ function PlantCard({ plant }) {
 
         }, 4000);
 
+
     }
 
 
 
 
 
-    function handleUndo() {
 
-        removePlant(plant.pageid);
+
+
+    async function handleUndo() {
+
+
+        if(savedPlantId) {
+
+
+            await removePlant(savedPlantId);
+
+
+        }
+
 
         setSaved(false);
 
+        setSavedPlantId(null);
+
         setShowToast(false);
 
+
     }
+
+
 
 
 
@@ -84,6 +129,7 @@ function PlantCard({ plant }) {
                 onUndo={handleUndo}
 
             />
+
 
 
 
@@ -143,7 +189,6 @@ function PlantCard({ plant }) {
                         {plant.title}
 
                     </p>
-
 
 
 
@@ -208,6 +253,7 @@ function PlantCard({ plant }) {
                         }
 
 
+
                     </div>
 
 
@@ -216,10 +262,12 @@ function PlantCard({ plant }) {
 
             </div>
 
+
         </>
 
     );
 
 }
+
 
 export default PlantCard;
