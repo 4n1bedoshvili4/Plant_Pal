@@ -216,3 +216,53 @@
 
 }
 
+.toast {
+
+    position:fixed;
+
+    top:30px;
+
+    right:30px;
+
+    background:#4daa57;
+
+    color:white;
+
+    padding:16px 25px;
+
+    border-radius:15px;
+
+    font-weight:600;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+    animation:slideIn .3s ease;
+
+    z-index:1000;
+
+}
+
+
+
+@keyframes slideIn {
+
+
+    from {
+
+        transform:translateX(100px);
+
+        opacity:0;
+
+    }
+
+
+    to {
+
+        transform:translateX(0);
+
+        opacity:1;
+
+    }
+
+
+}

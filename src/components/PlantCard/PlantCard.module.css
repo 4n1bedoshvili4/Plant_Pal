@@ -154,3 +154,21 @@
     background:#397d43;
 
 }
+
+.savedButton {
+
+    background:#b5dda4;
+
+    color:#214d3a;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px;
+
+    font-weight:600;
+
+    cursor:default;
+
+}
