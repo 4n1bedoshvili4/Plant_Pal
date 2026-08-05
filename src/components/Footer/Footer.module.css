@@ -1,0 +1,163 @@
+.footer {
+
+    background:#183A2B;
+
+    color:white;
+
+
+    padding:70px 10% 25px;
+
+
+}
+
+
+
+
+.container {
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    2fr 1fr 1fr;
+
+
+    gap:60px;
+
+
+}
+
+
+
+
+.brand h2 {
+
+
+    font-size:32px;
+
+    margin:0 0 15px;
+
+
+}
+
+
+
+
+
+.brand p {
+
+
+    max-width:350px;
+
+
+    color:#D5E1D7;
+
+
+    line-height:1.6;
+
+
+}
+
+
+
+
+
+.column {
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:12px;
+
+
+}
+
+
+
+
+
+.column h3 {
+
+
+    margin:0 0 10px;
+
+
+    font-size:18px;
+
+
+}
+
+
+
+
+
+.column a {
+
+
+    color:#D5E1D7;
+
+    text-decoration:none;
+
+
+}
+
+
+
+
+
+.column a:hover {
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.column p {
+
+
+    color:#D5E1D7;
+
+    margin:0;
+
+
+}
+
+
+
+
+
+.bottom {
+
+
+    margin-top:50px;
+
+
+    padding-top:20px;
+
+
+    border-top:
+
+    1px solid rgba(255,255,255,0.2);
+
+
+    text-align:center;
+
+
+    color:#D5E1D7;
+
+
+    font-size:14px;
+
+
+}
