@@ -68,7 +68,7 @@
 
     font-weight: 500;
 
-    transition: color .25s ease;
+    transition: all 0.3s ease;
 
 }
 
@@ -78,17 +78,19 @@
 
     position: absolute;
 
-    left: 0;
-    bottom: -6px;
+    bottom: -8px;
 
-    width: 0%;
+    left: 0;
+
+    width: 0;
+
     height: 2px;
 
     background: #5FBA7D;
 
-    border-radius: 20px;
+    border-radius: 10px;
 
-    transition: width .3s ease;
+    transition: width 0.3s ease;
 
 }
 
@@ -98,6 +100,7 @@
 
 }
 
+
 .links a:hover::after {
 
     width: 100%;
@@ -105,17 +108,16 @@
 }
 
 
-
-
-
 .signup {
 
-    background:#183A2B;
+    padding: 12px 26px;
 
-    color:white !important;
+    background: #5FBA7D;
 
-    padding:12px 22px;
+    color: white !important;
 
-    border-radius:12px;
+    border-radius: 999px;
+
+    transition: all .3s ease;
 
 }

@@ -1,7 +1,7 @@
 .logo {
 
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
 
     margin: 0 auto;
 
@@ -9,13 +9,65 @@
     justify-content: center;
     align-items: center;
 
-    background: var(--mint);
-    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        #5FBA7D,
+        #95D5B2
+    );
 
-    font-size: 40px;
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 35px rgba(95,186,125,.25);
+
     animation: logoFloat 4s ease-in-out infinite;
 
 }
+
+
+
+.leaf {
+
+    width: 28px;
+    height: 42px;
+
+    background: white;
+
+    border-radius:
+
+        100% 0 100% 0;
+
+    transform:
+
+        rotate(-45deg);
+
+    position: relative;
+
+}
+
+
+
+.leaf::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 3px;
+
+    height: 30px;
+
+    background: rgba(95,186,125,.8);
+
+    left: 13px;
+
+    top: 8px;
+
+    transform: rotate(45deg);
+
+}
+
+
 
 @keyframes logoFloat {
 
@@ -25,11 +77,13 @@
 
     }
 
+
     50% {
 
-        transform: translateY(-6px);
+        transform: translateY(-5px);
 
     }
+
 
     100% {
 

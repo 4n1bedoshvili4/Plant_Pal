@@ -3,7 +3,7 @@ import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 import About from "../../components/About/About";
 import styles from "./Landing.module.css";
-
+import { Link } from "react-router-dom";
 
 function Landing() {
 
@@ -53,31 +53,32 @@ function Landing() {
 
 
 
-                    <div className={styles.buttons}>
+                <div className={styles.buttons}>
 
 
-                        <button 
-                            className={styles.primary}
-                        >
+                    <Link
+                        to="/register"
+                        className={styles.primary}
+                    >
 
-                            Start Growing
+                        Start Growing
 
-                        </button>
-
-
-
-
-                        <button 
-                            className={styles.secondary}
-                        >
-
-                            Learn More
-
-                        </button>
+                    </Link>
 
 
 
-                    </div>
+
+                    <a
+                        href="#about"
+                        className={styles.secondary}
+                    >
+
+                        Learn More
+
+                    </a>
+
+
+                </div>
 
 
                 </div>
