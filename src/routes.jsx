@@ -5,7 +5,6 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Search from "./pages/Search/Search";
 import MyPlants from "./pages/MyPlants/MyPlants";
 import Reminders from "./pages/Reminders/Reminders";
-import Profile from "./pages/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import PlantDetails from "./pages/PlantDetails/PlantDetails";
@@ -63,14 +62,6 @@ function AppRoutes() {
                         </ProtectedRoute>
                     }
                 />
-                <Route
-                    path="/profile"
-                    element={
-                        <ProtectedRoute>
-                            <Profile />
-                        </ProtectedRoute>
-                    }
-                /> 
                 <Route
                     path="/reset-password"
                     element={<ResetPassword />}

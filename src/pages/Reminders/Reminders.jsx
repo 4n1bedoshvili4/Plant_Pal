@@ -10,7 +10,6 @@ import {
     FiSearch,
     FiGrid,
     FiDroplet,
-    FiUser,
     FiPlus
 } from "react-icons/fi";
 
@@ -254,20 +253,6 @@ function Reminders(){
                         <FiDroplet/>
 
                         Reminders
-
-                    </Link>
-
-
-
-
-
-                    <Link to="/profile">
-
-
-                        <FiUser/>
-
-                        Profile
-
 
                     </Link>
 

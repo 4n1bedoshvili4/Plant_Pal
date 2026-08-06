@@ -1,30 +1,36 @@
 import { useEffect, useState } from "react";
-import { searchPlants } from "../../api/plantApi";
-import PlantCard from "../../components/PlantCard/PlantCard";
+import { Link } from "react-router-dom";
+
 import Brand from "../../components/Brand/Brand";
+import PlantCard from "../../components/PlantCard/PlantCard";
 
 import {
     FiHome,
     FiSearch,
     FiGrid,
-    FiDroplet,
-    FiUser
+    FiDroplet
 } from "react-icons/fi";
+
+
+import { searchPlants } from "../../api/plantApi";
 
 import monstera from "../../assets/monstera.png";
 
-import { Link } from "react-router-dom";
-
 import styles from "./Search.module.css";
+
 
 
 function Search() {
 
 
-    const [query, setQuery] = useState("");
-    const [plants, setPlants] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [searched, setSearched] = useState(false);
+    const [query,setQuery] = useState("");
+
+    const [plants,setPlants] = useState([]);
+
+    const [loading,setLoading] = useState(false);
+
+    const [searched,setSearched] = useState(false);
+
 
 
 
@@ -60,19 +66,21 @@ function Search() {
 
 
 
+
     async function loadPlants(value){
 
 
         try{
 
             setLoading(true);
+
             setSearched(true);
 
 
             const results = await searchPlants(value);
 
 
-            setPlants(results);
+            setPlants(results || []);
 
 
         }
@@ -95,11 +103,20 @@ function Search() {
 
 
 
+
     useEffect(()=>{
 
 
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        loadPlants("Monstera deliciosa");
+        async function initialSearch(){
+
+
+            await loadPlants("Monstera deliciosa");
+
+
+        }
+
+
+        initialSearch();
 
 
     },[]);
@@ -108,13 +125,15 @@ function Search() {
 
 
 
+
+
     function handleSearch(e){
+
 
         e.preventDefault();
 
 
-        if(!query.trim())
-            return;
+        if(!query.trim()) return;
 
 
         loadPlants(query);
@@ -125,8 +144,8 @@ function Search() {
 
 
 
-    return (
 
+    return (
 
         <main className={styles.page}>
 
@@ -139,6 +158,7 @@ function Search() {
 
 
             <div className={styles.blurOne}></div>
+
             <div className={styles.blurTwo}></div>
 
 
@@ -155,46 +175,60 @@ function Search() {
 
 
                     <Link to="/dashboard">
+
                         <FiHome/>
+
                         Dashboard
+
                     </Link>
+
 
 
 
                     <Link
-                        className={styles.active}
                         to="/search"
+                        className={styles.active}
                     >
+
                         <FiSearch/>
+
                         Discover
+
                     </Link>
+
 
 
 
                     <Link to="/plants">
+
                         <FiGrid/>
+
                         My Plants
+
                     </Link>
+
+
 
 
 
                     <Link to="/reminders">
+
                         <FiDroplet/>
+
                         Reminders
+
                     </Link>
 
 
-
-                    <Link to="/profile">
-                        <FiUser/>
-                        Profile
-                    </Link>
 
 
                 </nav>
 
 
+
             </aside>
+
+
 
 
 
@@ -208,7 +242,6 @@ function Search() {
                 <section className={styles.hero}>
 
 
-
                     <h1>
                         Discover new plants
                     </h1>
@@ -220,6 +253,7 @@ function Search() {
 
 
 
+
                     <form
                         className={styles.searchBox}
                         onSubmit={handleSearch}
@@ -227,22 +261,37 @@ function Search() {
 
 
                         <input
+
                             type="text"
+
                             placeholder="Search plants..."
+
                             value={query}
-                            onChange={(e)=>setQuery(e.target.value)}
+
+                            onChange={
+                                e=>setQuery(e.target.value)
+                            }
+
                         />
 
 
-                        <button>
+
+                        <button type="submit">
+
                             Search
+
                         </button>
+
 
 
                     </form>
 
 
+
                 </section>
+
+
+
 
 
 
@@ -257,11 +306,13 @@ function Search() {
                     </h2>
 
 
+
                     <div className={styles.tags}>
 
 
                         {
                             popularPlants.map((plant)=>(
+
 
                                 <button
 
@@ -269,9 +320,16 @@ function Search() {
 
                                     onClick={()=>{
 
-                                        setQuery(plant.search);
 
-                                        loadPlants(plant.search);
+                                        setQuery(
+                                            plant.search
+                                        );
+
+
+                                        loadPlants(
+                                            plant.search
+                                        );
+
 
                                     }}
 
@@ -281,14 +339,18 @@ function Search() {
 
                                 </button>
 
+
                             ))
                         }
+
 
 
                     </div>
 
 
+
                 </section>
+
 
 
 
@@ -306,13 +368,18 @@ function Search() {
 
 
 
+
+
                     {
                         loading &&
 
                         <p className={styles.message}>
                             Searching plants...
                         </p>
+
                     }
+
+
 
 
 
@@ -329,11 +396,17 @@ function Search() {
                             {
                                 plants.map((plant)=>(
 
-                                   <PlantCard
+
+                                    <PlantCard
+
                                         key={plant.pageid}
+
                                         plant={plant}
+
                                         isSaved={false}
+
                                     />
+
 
                                 ))
                             }
@@ -347,10 +420,15 @@ function Search() {
 
 
 
+
+
+
+
                     {
                         searched &&
                         !loading &&
                         plants.length === 0 &&
+
 
                         <div className={styles.message}>
 
@@ -358,11 +436,16 @@ function Search() {
 
                         </div>
 
+
                     }
 
 
 
+
+
                 </section>
+
+
 
 
 
@@ -372,10 +455,11 @@ function Search() {
 
         </main>
 
-
     );
 
+
 }
+
 
 
 export default Search;

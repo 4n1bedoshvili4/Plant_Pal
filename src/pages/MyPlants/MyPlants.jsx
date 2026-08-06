@@ -8,14 +8,14 @@ import {
     FiHome,
     FiSearch,
     FiGrid,
-    FiDroplet,
-    FiUser
+    FiDroplet
 } from "react-icons/fi";
 
 import {
     getMyPlants,
     removePlant
 } from "../../services/myPlantService";
+
 
 import monstera from "../../assets/monstera.png";
 
@@ -30,14 +30,18 @@ function MyPlants(){
 
 
 
+
     useEffect(()=>{
 
 
         async function loadPlants(){
 
+
             const data = await getMyPlants();
 
+
             setPlants(data);
+
 
         }
 
@@ -51,6 +55,8 @@ function MyPlants(){
 
 
 
+
+
     async function handleRemove(id){
 
 
@@ -58,17 +64,15 @@ function MyPlants(){
 
 
         setPlants(prev =>
+
             prev.filter(
                 plant => plant.id !== id
             )
+
         );
 
 
     }
-
-
-
-
 
 
     return (
@@ -86,7 +90,11 @@ function MyPlants(){
 
 
             <div className={styles.blurOne}/>
+
             <div className={styles.blurTwo}/>
+
+
+
 
 
 
@@ -105,18 +113,23 @@ function MyPlants(){
                     <Link to="/dashboard">
 
                         <FiHome/>
+
                         Dashboard
 
                     </Link>
 
 
 
+
+
                     <Link to="/search">
 
                         <FiSearch/>
+
                         Discover Plants
 
                     </Link>
+
 
 
 
@@ -127,6 +140,7 @@ function MyPlants(){
                     >
 
                         <FiGrid/>
+
                         My Plants
 
                     </Link>
@@ -135,25 +149,15 @@ function MyPlants(){
 
 
 
+
+
                     <Link to="/reminders">
 
                         <FiDroplet/>
+
                         Reminders
 
                     </Link>
-
-
-
-
-
-                    <Link to="/profile">
-
-                        <FiUser/>
-                        Profile
-
-                    </Link>
-
-
 
                 </nav>
 
@@ -171,11 +175,8 @@ function MyPlants(){
             <section className={styles.content}>
 
 
-
-
-
-
                 <header className={styles.header}>
+
 
                     <h1>
                         My Collection
@@ -188,6 +189,8 @@ function MyPlants(){
 
 
                 </header>
+
+
 
 
 
@@ -209,9 +212,12 @@ function MyPlants(){
                             </h2>
 
 
+
                             <p>
                                 Discover plants and add them to your collection.
                             </p>
+
+
 
 
 
@@ -222,9 +228,12 @@ function MyPlants(){
                             </Link>
 
 
+
                         </section>
 
+
                     )
+
 
                     :
 
@@ -240,11 +249,12 @@ function MyPlants(){
 
 
 
+
                             <div className={styles.grid}>
 
 
                                 {
-                                    plants.map(plant=>(
+                                    plants.map(plant => (
 
 
                                         <PlantCard
@@ -264,10 +274,12 @@ function MyPlants(){
                                 }
 
 
+
                             </div>
 
 
                         </section>
+
 
                     )
 
@@ -278,6 +290,7 @@ function MyPlants(){
 
 
             </section>
+
 
 
 
