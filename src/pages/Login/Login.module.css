@@ -79,39 +79,10 @@
 
 
 
-
-.title {
-
-    margin-top:20px;
-
-    color:var(--dark-green);
-
-    font-size:32px;
-
-    font-weight:700;
-
-}
-
-
-
-
-.subtitle {
-
-    margin:10px 0 30px;
-
-    color:#6b7280;
-
-    font-size:15px;
-
-}
-
-
-
-
 .inputGroup {
 
     text-align:left;
-
+    transition: .25s;
     margin-bottom:20px;
 
 }
@@ -153,11 +124,13 @@
 
 
 
-.inputGroup input:focus {
+.inputGroup input:focus{
 
     outline:none;
 
     border-color:var(--primary-green);
+
+    box-shadow:0 0 0 4px rgba(82,183,136,.15);
 
 }
 
