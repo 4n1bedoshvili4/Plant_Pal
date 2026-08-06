@@ -1,38 +1,90 @@
 .brand {
 
-    display: flex;
-    align-items: center;
-    gap: 10px;
 
-    font-size: 24px;
-    font-weight: 700;
+    display:flex;
 
-    color: var(--dark-green);
+    align-items:center;
 
-    text-decoration: none;
+    gap:14px;
+
+
+    text-decoration:none;
+
+
+    color:var(--dark-green);
+
+
+    font-size:24px;
+
+
+    font-weight:700;
+
+
+    letter-spacing:-0.5px;
+
 
 }
 
 
-.icon {
 
-    font-size: 32px;
+.logoWrapper {
+
+
+    width:48px;
+
+    height:48px;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    border-radius:16px;
+
+
+    background:rgba(82,183,136,.15);
+
+
+    backdrop-filter:blur(15px);
+
+
+    overflow:hidden;
+
 
 }
+
+
+
+
+.logoWrapper img {
+
+
+    width:36px;
+
+    height:36px;
+
+
+}
+
+
 
 .brand:hover {
 
-    opacity: 0.8;
+
+    transform:translateY(-1px);
+
 
 }
 
-.brand:hover .icon {
 
-    transform: rotate(-10deg);
 
-}
+.brand {
 
-.icon {
-    font-size:32px;
-    transition:0.3s;
+
+    transition:.3s ease;
+
+
 }

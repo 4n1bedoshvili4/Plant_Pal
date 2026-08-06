@@ -4,167 +4,278 @@ import { useAuth } from "../../context/AuthContext";
 import Brand from "../../components/Brand/Brand";
 import { useEffect, useState } from "react";
 import { getUserProfile } from "../../services/firestoreService";
+import monstera from "../../assets/monstera.png";
+
+import {
+    FiHome,
+    FiSearch,
+    FiDroplet,
+    FiUser,
+    FiGrid,
+    FiPlus,
+    FiSun
+} from "react-icons/fi";
 
 
 function Dashboard() {
 
+
     const { user, loading } = useAuth();
+
     const [profile, setProfile] = useState(null);
+
+
 
     useEffect(() => {
 
-    async function loadProfile() {
 
-        if (!user) return;
+        async function loadProfile() {
 
-        const data = await getUserProfile(user.uid);
 
-        setProfile(data);
+            if (!user) return;
 
-    }
 
-    loadProfile();
+            const data = await getUserProfile(user.uid);
 
-}, [user]);
+
+            setProfile(data);
+
+
+        }
+
+
+        loadProfile();
+
+
+    }, [user]);
+
+
+
 
     if (loading) {
-    return <h1>Loading...</h1>;
+
+        return (
+            <div className={styles.loading}>
+                Loading...
+            </div>
+        );
+
     }
+
+
+
     return (
 
-        <div className={styles.dashboard}>
+
+        <main className={styles.dashboard}>
+
+
+            <img
+                src={monstera}
+                className={styles.backgroundPlant}
+                alt=""
+            />
+
+
+
+            <div className={styles.blurOne}></div>
+            <div className={styles.blurTwo}></div>
+
+
+
+
 
             <aside className={styles.sidebar}>
+
 
                 <Brand />
 
 
-            <nav>
-
-                <Link 
-                    className={styles.active}
-                    to="/dashboard"
-                >
-                    🏡 Dashboard
-                </Link>
+                <nav>
 
 
-                <Link to="/search">
-                    🔍 Search Plants
-                </Link>
+                    <Link
+                        className={styles.active}
+                        to="/dashboard"
+                    >
+                        <FiHome />
+                        Dashboard
+                    </Link>
 
 
-                <Link to="/plants">
-                    🌿 My Plants
-                </Link>
+                    <Link to="/search">
+                        <FiSearch />
+                        Discover
+                    </Link>
 
 
-                <Link to="/reminders">
-                    💧 Reminders
-                </Link>
+                    <Link to="/plants">
+                        <FiGrid />
+                        My Plants
+                    </Link>
 
 
-                <Link to="/profile">
-                    👤 Profile
-                </Link>
+                    <Link to="/reminders">
+                        <FiDroplet />
+                        Reminders
+                    </Link>
 
-            </nav>
+
+                    <Link to="/profile">
+                        <FiUser />
+                        Profile
+                    </Link>
+
+
+                </nav>
 
 
             </aside>
 
 
 
-            <main className={styles.content}>
-
-
-            <h1>
-                Good morning, {profile?.firstName || "Plant Lover"} 🌱
-            </h1>
-
-                <p className={styles.subtitle}>
-                    Let's take care of your plants today
-                </p>
 
 
 
-                <div className={styles.cards}>
+
+            <section className={styles.content}>
 
 
-                    <div className={styles.card}>
 
-                        <h3>
-                            🌿 My Plants
-                        </h3>
+                <section className={styles.hero}>
 
-                        <p>
-                            6 plants in your collection
+
+                    <div>
+
+
+                        <p className={styles.smallTitle}>
+                            PLANTPAL
                         </p>
+
+
+                        <h1>
+                            Good morning,{" "}
+                            {profile?.firstName || "Plant Lover"}
+                        </h1>
+
+
+                        <p className={styles.subtitle}>
+                            Your plants are waiting for a little care today.
+                        </p>
+
+
+
+                        <div className={styles.actions}>
+
+
+                            <Link to="/plants">
+                                <FiPlus />
+                                Add Plant
+                            </Link>
+
+
+                            <Link to="/search">
+                                <FiSearch />
+                                Find Plants
+                            </Link>
+
+
+                        </div>
+
+
 
                     </div>
 
 
 
-                    <div className={styles.card}>
 
-                        <h3>
-                            💧 Water Today
-                        </h3>
+                    <div className={styles.heroStats}>
 
-                        <p>
-                            2 plants need watering
-                        </p>
+
+                        <div>
+
+                            <strong>
+                                0
+                            </strong>
+
+                            <span>
+                                Plants
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div>
+
+                            <strong>
+                                0
+                            </strong>
+
+                            <span>
+                                Reminders
+                            </span>
+
+
+                        </div>
+
+
 
                     </div>
 
 
 
-                    <div className={styles.card}>
+                </section>
 
-                        <h3>
-                            ☀️ Light Status
-                        </h3>
 
-                        <p>
-                            All plants are healthy
-                        </p>
+
+
+
+
+
+                <section className={styles.section}>
+
+
+                    <div className={styles.sectionTitle}>
+
+                        <h2>
+                            Your Collection
+                        </h2>
+
+
+                        <Link to="/plants">
+                            View all
+                        </Link>
+
 
                     </div>
 
 
-                </div>
 
 
 
-                <section className={styles.plants}>
-
-                    <h2>
-                        Your Plants
-                    </h2>
+                    <div className={styles.plants}>
 
 
-                    <div className={styles.plantGrid}>
+                        <div className={styles.emptyCard}>
 
 
-                        <div className={styles.plantCard}>
-                            🌿
-                            <h3>Monstera</h3>
-                            <p>Water every 7 days</p>
+                            <FiPlus />
+
+
+                            <h3>
+                                Add your first plant
+                            </h3>
+
+
+                            <p>
+                                Start building your digital garden.
+                            </p>
+
+
                         </div>
 
-
-                        <div className={styles.plantCard}>
-                            🌵
-                            <h3>Aloe Vera</h3>
-                            <p>Water every 14 days</p>
-                        </div>
-
-
-                        <div className={styles.plantCard}>
-                            🌱
-                            <h3>Snake Plant</h3>
-                            <p>Low maintenance</p>
-                        </div>
 
 
                     </div>
@@ -173,12 +284,95 @@ function Dashboard() {
                 </section>
 
 
-            </main>
 
 
-        </div>
+
+
+
+
+
+                <section className={styles.section}>
+
+
+                    <h2>
+                        Today's Care
+                    </h2>
+
+
+
+                    <div className={styles.careGrid}>
+
+
+                        <div className={styles.careCard}>
+
+
+                            <FiDroplet />
+
+
+                            <div>
+
+                                <h3>
+                                    Watering
+                                </h3>
+
+
+                                <p>
+                                    No plants need watering today.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+                        <div className={styles.careCard}>
+
+
+                            <FiSun />
+
+
+                            <div>
+
+                                <h3>
+                                    Plant Health
+                                </h3>
+
+
+                                <p>
+                                    Your garden is looking good.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </section>
+
+
+
+
+
+
+            </section>
+
+
+
+        </main>
+
 
     );
+
 }
 
 

@@ -1,23 +1,27 @@
 import { Link } from "react-router-dom";
+import Logo from "../Logo/Logo";
 import styles from "./Brand.module.css";
 
 
 function Brand() {
 
+
     return (
 
-        <Link 
+        <Link
             to="/dashboard"
             className={styles.brand}
         >
 
-            <span className={styles.icon}>
-                🌱
-            </span>
+            <div className={styles.logoWrapper}>
+                <Logo />
+            </div>
+
 
             <span>
                 PlantPal
             </span>
+
 
         </Link>
 
