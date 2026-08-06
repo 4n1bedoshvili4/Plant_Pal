@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 import { getUserProfile } from "../../services/firestoreService";
 import { getMyPlants } from "../../services/myPlantService";
+import { getMyReminders } from "../../services/reminderService";
 
 import monstera from "../../assets/monstera.png";
 
@@ -33,6 +34,8 @@ function Dashboard() {
     const [profile, setProfile] = useState(null);
 
     const [plants, setPlants] = useState([]);
+
+    const [reminders, setReminders] = useState([]);
 
 
 
@@ -62,22 +65,54 @@ function Dashboard() {
 
 
 
-            const profileData = await getUserProfile(user.uid);
+            try {
 
 
-            setProfile(profileData);
+                const profileData = await getUserProfile(user.uid);
+
+
+                setProfile(profileData);
 
 
 
 
-            const plantData = await getMyPlants();
+                const plantData = await getMyPlants();
 
 
-            setPlants(plantData);
+                setPlants(plantData);
+
+
+
+
+
+                const reminderData = await getMyReminders();
+
+
+
+                const activeReminders = reminderData.filter(
+                    reminder => !reminder.completed
+                );
+
+
+
+                setReminders(activeReminders);
+
+
+
+            }
+            catch(error){
+
+                console.error(
+                    "Dashboard loading error:",
+                    error
+                );
+
+            }
 
 
 
         }
+
 
 
 
@@ -86,6 +121,7 @@ function Dashboard() {
 
 
     },[user]);
+
 
 
 
@@ -115,12 +151,10 @@ function Dashboard() {
 
 
 
-
     return (
 
 
         <main className={styles.dashboard}>
-
 
 
             <img
@@ -138,8 +172,6 @@ function Dashboard() {
             <div className={styles.blurOne}></div>
 
             <div className={styles.blurTwo}></div>
-
-
 
 
 
@@ -177,11 +209,9 @@ function Dashboard() {
 
                     <Link to="/search">
 
-
                         <FiSearch/>
 
                         Discover
-
 
                     </Link>
 
@@ -191,11 +221,9 @@ function Dashboard() {
 
                     <Link to="/plants">
 
-
                         <FiGrid/>
 
                         My Plants
-
 
                     </Link>
 
@@ -205,13 +233,14 @@ function Dashboard() {
 
                     <Link to="/reminders">
 
-
                         <FiDroplet/>
 
                         Reminders
 
-
                     </Link>
+
+
+
                     <button
 
                         className={styles.logout}
@@ -220,16 +249,16 @@ function Dashboard() {
 
                     >
 
-
                         <FiLogOut/>
-
 
                         Logout
 
 
-
                     </button>
+
+
                 </nav>
+
 
             </aside>
 
@@ -252,22 +281,18 @@ function Dashboard() {
 
                         <h1>
 
-
                             Good morning,{" "}
 
-
                             {profile?.firstName || "Plant Lover"}
-
 
                         </h1>
 
 
 
+
                         <p className={styles.subtitle}>
 
-
                             Your plants are waiting for a little care today.
-
 
                         </p>
 
@@ -303,13 +328,11 @@ function Dashboard() {
                             </Link>
 
 
-
                         </div>
 
 
 
                     </div>
-
 
 
 
@@ -344,12 +367,14 @@ function Dashboard() {
 
 
 
+
+
                         <div>
 
 
                             <strong>
 
-                                0
+                                {reminders.length}
 
                             </strong>
 
@@ -365,7 +390,9 @@ function Dashboard() {
 
 
 
+
                     </div>
+
 
 
 
@@ -401,7 +428,6 @@ function Dashboard() {
                         </Link>
 
 
-
                     </div>
 
 
@@ -433,6 +459,7 @@ function Dashboard() {
 
 
 
+
                                     <p>
 
                                         Start building your digital garden.
@@ -447,7 +474,10 @@ function Dashboard() {
 
                             )
 
+
+
                             :
+
 
 
                             plants.slice(0,3).map((plant)=>(
@@ -466,6 +496,7 @@ function Dashboard() {
                                     {
 
                                         plant.image && (
+
 
                                             <img
 
@@ -504,8 +535,8 @@ function Dashboard() {
                                 </div>
 
 
-                            ))
 
+                            ))
 
                         }
 
@@ -540,13 +571,17 @@ function Dashboard() {
 
 
 
+
                     <div className={styles.careGrid}>
+
+
 
 
                         <div className={styles.careCard}>
 
 
                             <FiDroplet/>
+
 
 
                             <div>
@@ -566,11 +601,14 @@ function Dashboard() {
                                 </p>
 
 
+
                             </div>
 
 
 
                         </div>
+
+
 
 
 
@@ -584,6 +622,7 @@ function Dashboard() {
                             <FiSun/>
 
 
+
                             <div>
 
 
@@ -592,6 +631,7 @@ function Dashboard() {
                                     Plant Health
 
                                 </h3>
+
 
 
 
@@ -611,11 +651,15 @@ function Dashboard() {
 
 
 
+
+
                     </div>
 
 
 
                 </section>
+
+
 
 
 
@@ -631,8 +675,8 @@ function Dashboard() {
         </main>
 
 
-
     );
+
 
 }
 
