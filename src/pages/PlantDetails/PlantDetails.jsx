@@ -6,10 +6,19 @@ import { getPlantDetails } from "../../api/plantApi";
 
 import { addPlant } from "../../services/myPlantService";
 
+import monstera from "../../assets/monstera.png";
+
+import {
+    FiArrowLeft,
+    FiPlus,
+    FiCheck
+} from "react-icons/fi";
+
 import styles from "./PlantDetails.module.css";
 
 
-function PlantDetails() {
+
+function PlantDetails(){
 
 
     const { pageid } = useParams();
@@ -17,21 +26,24 @@ function PlantDetails() {
     const navigate = useNavigate();
 
 
-    const [plant, setPlant] = useState(null);
 
-    const [loading, setLoading] = useState(true);
+    const [plant,setPlant] = useState(null);
 
-    const [added, setAdded] = useState(false);
+    const [loading,setLoading] = useState(true);
 
-
-
-    useEffect(() => {
+    const [added,setAdded] = useState(false);
 
 
-        async function loadPlant() {
 
 
-            try {
+
+    useEffect(()=>{
+
+
+        async function loadPlant(){
+
+
+            try{
 
 
                 const data = await getPlantDetails(pageid);
@@ -40,10 +52,8 @@ function PlantDetails() {
                 setPlant(data);
 
 
-            } 
-
-
-            catch(error) {
+            }
+            catch(error){
 
 
                 console.error(
@@ -52,10 +62,8 @@ function PlantDetails() {
                 );
 
 
-            } 
-
-
-            finally {
+            }
+            finally{
 
 
                 setLoading(false);
@@ -72,7 +80,7 @@ function PlantDetails() {
 
 
 
-    }, [pageid]);
+    },[pageid]);
 
 
 
@@ -80,31 +88,36 @@ function PlantDetails() {
 
 
 
-function handleAddPlant() {
 
 
-    if(!plant) {
+    async function handleAddPlant(){
 
-        return;
+
+        if(!plant) return;
+
+
+
+        await addPlant(plant);
+
+
+
+        setAdded(true);
+
+
+
+        setTimeout(()=>{
+
+
+            setAdded(false);
+
+
+        },3000);
+
+
 
     }
 
 
-    addPlant(plant);
-
-
-    setAdded(true);
-
-
-
-    setTimeout(() => {
-
-        setAdded(false);
-
-    }, 3000);
-
-
-}
 
 
 
@@ -112,7 +125,7 @@ function handleAddPlant() {
 
 
 
-    if(loading) {
+    if(loading){
 
 
         return (
@@ -125,7 +138,6 @@ function handleAddPlant() {
 
         );
 
-
     }
 
 
@@ -133,7 +145,7 @@ function handleAddPlant() {
 
 
 
-    if(!plant) {
+    if(!plant){
 
 
         return (
@@ -146,8 +158,8 @@ function handleAddPlant() {
 
         );
 
-
     }
+
 
 
 
@@ -160,28 +172,64 @@ function handleAddPlant() {
 
 
         <main className={styles.page}>
+
+
+            <img
+
+                src={monstera}
+
+                className={styles.backgroundPlant}
+
+                alt=""
+
+            />
+
+
+
+            <div className={styles.blurOne}></div>
+
+            <div className={styles.blurTwo}></div>
+
+
+
+
+
+
+
             {
-            added && (
+                added && (
 
-                <div className={styles.toast}>
+                    <div className={styles.toast}>
 
-                    ✓ Plant added to My Plants
+                        <FiCheck/>
 
-                </div>
+                        Plant added to My Plants
 
-            )
-        }
+                    </div>
+
+                )
+            }
+
+
+
+
+
+
+
 
 
             <button
 
                 className={styles.backButton}
 
-                onClick={() => navigate("/search")}
+                onClick={()=>navigate("/search")}
 
             >
 
-                ← Back to Search
+                <FiArrowLeft/>
+
+                Back to Search
+
 
             </button>
 
@@ -192,15 +240,19 @@ function handleAddPlant() {
 
 
 
-            <section className={styles.plantCard}>
+
+            <section className={styles.card}>
 
 
-                <div className={styles.imageWrapper}>
+                <div className={styles.imageSection}>
 
 
                     {
-                        plant.thumbnail?.source ? (
 
+                        plant.thumbnail?.source ?
+
+
+                        (
 
                             <img
 
@@ -212,7 +264,6 @@ function handleAddPlant() {
 
                             />
 
-
                         )
 
 
@@ -221,20 +272,21 @@ function handleAddPlant() {
 
                         (
 
-
                             <div className={styles.noImage}>
 
-                                Plant
+                                🌱
 
                             </div>
 
-
                         )
+
 
                     }
 
 
+
                 </div>
+
 
 
 
@@ -255,13 +307,11 @@ function handleAddPlant() {
 
 
 
-
                     <p className={styles.scientific}>
 
                         {plant.title}
 
                     </p>
-
 
 
 
@@ -286,7 +336,6 @@ function handleAddPlant() {
 
 
 
-
                     <p className={styles.description}>
 
 
@@ -300,7 +349,7 @@ function handleAddPlant() {
 
                             ?
 
-                            plant.extract.slice(0,900) + "..."
+                            plant.extract.slice(0,900)+"..."
 
                             :
 
@@ -331,7 +380,9 @@ function handleAddPlant() {
 
                     >
 
-                        + Add to My Plants
+                        <FiPlus/>
+
+                        Add to My Plants
 
                     </button>
 
@@ -350,6 +401,7 @@ function handleAddPlant() {
 
 
 
+
         </main>
 
 
@@ -357,6 +409,7 @@ function handleAddPlant() {
 
 
 }
+
 
 
 export default PlantDetails;
