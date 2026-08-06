@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
-    addPlant,
-    removePlant,
-    isPlantSaved
+    addPlant
 } from "../../services/myPlantService";
 
 import Toast from "../Toast/Toast";
@@ -12,53 +10,25 @@ import Toast from "../Toast/Toast";
 import styles from "./PlantCard.module.css";
 
 
-function PlantCard({ plant }) {
+function PlantCard({
+    plant,
+    isSaved = false,
+    onRemove
+}) {
 
-
-    const [saved, setSaved] = useState(false);
-
-    const [savedPlantId, setSavedPlantId] = useState(null);
 
     const [showToast, setShowToast] = useState(false);
 
+    const [saved, setSaved] = useState(isSaved);
+
+    const [savedPlantId, setSavedPlantId] = useState(
+        plant.id || null
+    );
 
 
 
 
-    useEffect(() => {
-
-
-        async function checkSaved() {
-
-
-            const result = await isPlantSaved(
-
-                plant.pageid
-
-            );
-
-
-            setSaved(result.saved);
-
-            setSavedPlantId(result.id);
-
-
-        }
-
-
-        checkSaved();
-
-
-    }, [plant.pageid]);
-
-
-
-
-
-
-
-
-    async function handleAddPlant() {
+    async function handleAddPlant(){
 
 
         const id = await addPlant(plant);
@@ -73,11 +43,11 @@ function PlantCard({ plant }) {
 
 
 
-        setTimeout(() => {
+        setTimeout(()=>{
 
             setShowToast(false);
 
-        }, 4000);
+        },4000);
 
 
     }
@@ -87,16 +57,14 @@ function PlantCard({ plant }) {
 
 
 
+    async function handleRemove(){
 
 
-    async function handleUndo() {
+        if(onRemove){
 
-
-        if(savedPlantId) {
-
-
-            await removePlant(savedPlantId);
-
+            await onRemove(
+                savedPlantId || plant.id
+            );
 
         }
 
@@ -105,11 +73,8 @@ function PlantCard({ plant }) {
 
         setSavedPlantId(null);
 
-        setShowToast(false);
-
 
     }
-
 
 
 
@@ -120,13 +85,14 @@ function PlantCard({ plant }) {
 
         <>
 
+
             <Toast
 
                 show={showToast}
 
                 message={`${plant.title} added to My Plants`}
 
-                onUndo={handleUndo}
+                onUndo={handleRemove}
 
             />
 
@@ -138,14 +104,18 @@ function PlantCard({ plant }) {
 
 
                 {
+                    plant.thumbnail?.source || plant.image
 
-                    plant.thumbnail?.source ?
+                    ?
 
                     (
 
                         <img
 
-                            src={plant.thumbnail.source}
+                            src={
+                                plant.thumbnail?.source ||
+                                plant.image
+                            }
 
                             alt={plant.title}
 
@@ -186,9 +156,10 @@ function PlantCard({ plant }) {
 
                     <p className={styles.scientific}>
 
-                        {plant.title}
+                        Botanical information
 
                     </p>
+
 
 
 
@@ -212,9 +183,12 @@ function PlantCard({ plant }) {
 
 
 
+
                         {
 
-                            saved ?
+                            saved
+
+                            ?
 
                             (
 
@@ -222,11 +196,11 @@ function PlantCard({ plant }) {
 
                                     className={styles.savedButton}
 
-                                    disabled
+                                    onClick={handleRemove}
 
                                 >
 
-                                    ✓ In My Plants
+                                    Remove
 
                                 </button>
 
@@ -244,13 +218,15 @@ function PlantCard({ plant }) {
 
                                 >
 
-                                    + Add Plant
+                                    Add Plant
 
                                 </button>
 
                             )
 
+
                         }
+
 
 
 
@@ -266,6 +242,7 @@ function PlantCard({ plant }) {
         </>
 
     );
+
 
 }
 

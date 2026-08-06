@@ -1,0 +1,543 @@
+.page {
+
+    min-height:100vh;
+    display:flex;
+    position:relative;
+    overflow:hidden;
+    background:var(--background);
+
+    animation:pageEnter .7s ease;
+
+}
+
+
+
+@keyframes pageEnter {
+
+    from {
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to {
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
+
+
+.backgroundPlant {
+
+    position:absolute;
+
+    width:700px;
+
+    right:-220px;
+
+    top:-120px;
+
+    opacity:.06;
+
+}
+
+
+
+
+
+.blurOne {
+
+    position:absolute;
+
+    width:500px;
+
+    height:500px;
+
+    background:#95d5b2;
+
+    filter:blur(130px);
+
+    border-radius:50%;
+
+    left:-250px;
+
+    top:-120px;
+
+}
+
+
+
+.blurTwo {
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    background:#d8f3dc;
+
+    filter:blur(130px);
+
+    border-radius:50%;
+
+    right:-100px;
+
+    bottom:-200px;
+
+}
+
+
+
+
+
+
+/* SIDEBAR */
+
+
+.sidebar {
+
+    width:250px;
+
+    margin:25px;
+
+    padding:35px 25px;
+
+    border-radius:28px;
+
+
+    background:rgba(255,255,255,.55);
+
+    backdrop-filter:blur(25px);
+
+
+    border:1px solid rgba(255,255,255,.7);
+
+    box-shadow:
+
+    0 20px 60px rgba(0,0,0,.07);
+
+    z-index:2;
+
+}
+
+
+
+
+
+.sidebar nav {
+
+    margin-top:45px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+
+
+
+
+.sidebar a {
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+
+    padding:14px 16px;
+
+
+    border-radius:14px;
+
+
+    text-decoration:none;
+
+
+    color:#6b7280;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.sidebar a:hover {
+
+
+    background:rgba(82,183,136,.14);
+
+    color:var(--dark-green);
+
+    transform:translateX(6px);
+
+}
+
+
+
+.sidebar svg {
+
+    font-size:20px;
+
+}
+
+
+
+
+
+.active {
+
+
+    background:var(--dark-green)!important;
+
+    color:white!important;
+
+}
+
+
+
+
+
+
+
+/* CONTENT */
+
+
+.content {
+
+    flex:1;
+
+    padding:55px;
+
+    z-index:2;
+
+}
+
+
+
+
+
+
+
+
+/* HEADER */
+
+
+.header {
+
+
+    padding:40px;
+
+
+    border-radius:30px;
+
+
+    background:rgba(255,255,255,.45);
+
+    backdrop-filter:blur(20px);
+
+
+    border:1px solid rgba(255,255,255,.6);
+
+
+    animation:fadeUp .7s ease;
+
+}
+
+
+
+
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+
+.header h1 {
+
+
+    margin:0 0 10px;
+
+
+    font-size:44px;
+
+
+    color:var(--dark-green);
+
+
+}
+
+
+
+
+.header span {
+
+
+    color:#6b7280;
+
+    font-size:18px;
+
+}
+
+
+
+
+
+
+
+
+/* ADD BUTTON */
+
+
+.addButton {
+
+
+    margin-top:30px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+
+    padding:15px 28px;
+
+
+    border:none;
+
+
+    border-radius:16px;
+
+
+    background:var(--primary-green);
+
+
+    color:white;
+
+
+    font-size:15px;
+
+    font-weight:600;
+
+
+    cursor:pointer;
+
+
+    transition:.35s;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(82,183,136,.25);
+
+
+}
+
+
+
+
+
+.addButton:hover {
+
+
+    background:var(--dark-green);
+
+
+    transform:
+
+    translateY(-5px)
+
+    scale(1.03);
+
+
+    box-shadow:
+
+    0 20px 40px rgba(82,183,136,.35);
+
+}
+
+
+
+
+
+
+
+
+/* LIST */
+
+
+.list {
+
+
+    margin-top:45px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:18px;
+
+
+    max-width:900px;
+
+
+}
+
+
+
+
+
+.list > * {
+
+
+    animation:
+
+    reminderAppear .5s ease backwards;
+
+
+}
+
+
+
+
+
+.list > *:nth-child(1){
+
+    animation-delay:.1s;
+
+}
+
+.list > *:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.list > *:nth-child(3){
+
+    animation-delay:.3s;
+
+}
+
+
+
+
+
+@keyframes reminderAppear {
+
+
+    from {
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* EMPTY */
+
+
+.empty {
+
+
+    margin-top:45px;
+
+
+    padding:70px;
+
+
+    text-align:center;
+
+
+    border-radius:30px;
+
+
+    background:
+
+    rgba(255,255,255,.45);
+
+
+    backdrop-filter:blur(25px);
+
+
+    border:
+
+    1px dashed rgba(82,183,136,.4);
+
+
+}
+
+
+
+.empty h2 {
+
+
+    color:var(--dark-green);
+
+    font-size:28px;
+
+}
+
+
+
+.empty p {
+
+
+    color:#6b7280;
+
+    margin-top:12px;
+
+}

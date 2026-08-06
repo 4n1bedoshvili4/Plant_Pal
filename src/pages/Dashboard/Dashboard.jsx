@@ -5,6 +5,7 @@ import Brand from "../../components/Brand/Brand";
 import { useEffect, useState } from "react";
 import { getUserProfile } from "../../services/firestoreService";
 import monstera from "../../assets/monstera.png";
+import { getMyPlants } from "../../services/myPlantService";
 
 import {
     FiHome,
@@ -23,31 +24,37 @@ function Dashboard() {
     const { user, loading } = useAuth();
 
     const [profile, setProfile] = useState(null);
+    const [plants, setPlants] = useState([]);
+
+
+        useEffect(() => {
+
+
+        async function loadDashboard(){
+
+
+            if(!user) return;
+
+
+            const profileData = await getUserProfile(user.uid);
+
+            setProfile(profileData);
 
 
 
-    useEffect(() => {
+            const plantData = await getMyPlants();
 
+            setPlants(plantData);
 
-        async function loadProfile() {
-
-
-            if (!user) return;
-
-
-            const data = await getUserProfile(user.uid);
-
-
-            setProfile(data);
 
 
         }
 
 
-        loadProfile();
+        loadDashboard();
 
 
-    }, [user]);
+        },[user]);
 
 
 
@@ -148,10 +155,6 @@ function Dashboard() {
                     <div>
 
 
-                        <p className={styles.smallTitle}>
-                            PLANTPAL
-                        </p>
-
 
                         <h1>
                             Good morning,{" "}
@@ -194,14 +197,13 @@ function Dashboard() {
 
                         <div>
 
-                            <strong>
-                                0
+                           <strong>
+                                {plants.length}
                             </strong>
 
                             <span>
                                 Plants
                             </span>
-
 
                         </div>
 
@@ -258,23 +260,64 @@ function Dashboard() {
                     <div className={styles.plants}>
 
 
-                        <div className={styles.emptyCard}>
+<div className={styles.plantPreview}>
+
+{
+    plants.length === 0 ? (
+
+        <div className={styles.emptyCard}>
+
+            <FiPlus />
+
+            <h3>
+                Add your first plant
+            </h3>
+
+            <p>
+                Start building your digital garden.
+            </p>
+
+        </div>
+
+    ) : (
+
+        plants.slice(0,3).map((plant)=>(
+
+            <div 
+                className={styles.savedPlant}
+                key={plant.id}
+            >
+
+                {
+                    plant.image && (
+
+                        <img
+                            src={plant.image}
+                            alt={plant.title}
+                        />
+
+                    )
+                }
 
 
-                            <FiPlus />
+                <h3>
+                    {plant.title}
+                </h3>
 
 
-                            <h3>
-                                Add your first plant
-                            </h3>
+                <p>
+                    {plant.extract?.slice(0,80)}...
+                </p>
 
 
-                            <p>
-                                Start building your digital garden.
-                            </p>
+            </div>
 
+        ))
 
-                        </div>
+    )
+}
+
+</div>
 
 
 

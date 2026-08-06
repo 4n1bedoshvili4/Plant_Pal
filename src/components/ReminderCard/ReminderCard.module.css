@@ -1,0 +1,359 @@
+.card {
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+
+    padding:22px 25px;
+
+
+    border-radius:20px;
+
+
+    background:
+    rgba(255,255,255,.65);
+
+
+    backdrop-filter:blur(20px);
+
+
+    border:
+    1px solid rgba(255,255,255,.7);
+
+
+    box-shadow:
+    0 12px 35px rgba(33,77,58,.08);
+
+
+    transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    background .35s ease;
+
+
+    cursor:pointer;
+
+
+    animation:
+    fadeUp .5s ease forwards;
+
+}
+
+
+
+
+
+.card:hover {
+
+
+    transform:
+    translateY(-7px);
+
+
+    background:
+    rgba(255,255,255,.85);
+
+
+    box-shadow:
+    0 25px 60px rgba(33,77,58,.16);
+
+}
+
+
+
+
+
+.icon {
+
+
+    width:58px;
+
+    height:58px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    border-radius:16px;
+
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(82,183,136,.25),
+        rgba(216,243,220,.7)
+    );
+
+
+    color:
+    var(--dark-green);
+
+
+    font-size:26px;
+
+
+    transition:.3s;
+
+}
+
+
+
+
+
+.card:hover .icon {
+
+
+    transform:
+    scale(1.08)
+    rotate(-5deg);
+
+
+}
+
+
+
+
+
+.info {
+
+
+    flex:1;
+
+
+    margin-left:20px;
+
+}
+
+
+
+
+
+.info h3 {
+
+
+    margin:0;
+
+
+    color:
+    var(--dark-green);
+
+
+    font-size:19px;
+
+
+    font-weight:700;
+
+}
+
+
+
+
+
+.info p {
+
+
+    margin:7px 0;
+
+
+    color:#4b5563;
+
+
+    font-size:15px;
+
+}
+
+
+
+
+
+.info span {
+
+
+    display:inline-block;
+
+
+    padding:5px 12px;
+
+
+    border-radius:999px;
+
+
+    background:
+    rgba(82,183,136,.12);
+
+
+    color:
+    var(--primary-green);
+
+
+    font-size:12px;
+
+
+    font-weight:600;
+
+}
+
+
+
+
+
+.actions {
+
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+
+
+
+
+.actions button {
+
+
+    width:42px;
+
+
+    height:42px;
+
+
+    border-radius:14px;
+
+
+    border:none;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    cursor:pointer;
+
+
+    transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+
+}
+
+
+
+
+
+.actions button:hover {
+
+
+    transform:
+    translateY(-4px);
+
+
+}
+
+
+
+
+
+.complete {
+
+
+    background:
+    #b7e4c7;
+
+
+    color:
+    var(--dark-green);
+
+}
+
+
+
+
+
+.complete:hover {
+
+
+    box-shadow:
+    0 10px 25px rgba(82,183,136,.35);
+
+}
+
+
+
+
+
+.delete {
+
+
+    background:
+    #ffe5e5;
+
+
+    color:
+    #b91c1c;
+
+}
+
+
+
+
+
+.delete:hover {
+
+
+    box-shadow:
+    0 10px 25px rgba(185,28,28,.2);
+
+}
+
+
+
+
+
+@keyframes fadeUp {
+
+
+    from {
+
+        opacity:0;
+
+        transform:
+        translateY(20px);
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+.water {
+    background:rgba(116,185,255,.2);
+    color:#2563eb;
+}
+
+
+.sun {
+    background:rgba(255,214,102,.25);
+    color:#d97706;
+}

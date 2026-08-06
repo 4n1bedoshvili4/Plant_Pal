@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
-
 import { searchPlants } from "../../api/plantApi";
-import { useNavigate } from "react-router-dom";
-
 import PlantCard from "../../components/PlantCard/PlantCard";
+import Brand from "../../components/Brand/Brand";
+
+import {
+    FiHome,
+    FiSearch,
+    FiGrid,
+    FiDroplet,
+    FiUser
+} from "react-icons/fi";
+
+import monstera from "../../assets/monstera.png";
+
+import { Link } from "react-router-dom";
 
 import styles from "./Search.module.css";
 
@@ -12,40 +22,37 @@ function Search() {
 
 
     const [query, setQuery] = useState("");
-
     const [plants, setPlants] = useState([]);
-
     const [loading, setLoading] = useState(false);
-
     const [searched, setSearched] = useState(false);
 
-    const navigate = useNavigate();
+
 
     const popularPlants = [
 
         {
-            name: "Monstera",
-            search: "Monstera deliciosa"
+            name:"Monstera",
+            search:"Monstera deliciosa"
         },
 
         {
-            name: "Aloe Vera",
-            search: "Aloe vera"
+            name:"Aloe Vera",
+            search:"Aloe vera"
         },
 
         {
-            name: "Snake Plant",
-            search: "Dracaena trifasciata"
+            name:"Snake Plant",
+            search:"Dracaena trifasciata"
         },
 
         {
-            name: "Rose",
-            search: "Rosa"
+            name:"Rose",
+            search:"Rosa"
         },
 
         {
-            name: "Lavender",
-            search: "Lavandula"
+            name:"Lavender",
+            search:"Lavandula"
         }
 
     ];
@@ -53,36 +60,30 @@ function Search() {
 
 
 
+    async function loadPlants(value){
 
-    async function loadPlants(searchValue) {
 
-
-        try {
+        try{
 
             setLoading(true);
-
             setSearched(true);
 
 
-            const results = await searchPlants(searchValue);
+            const results = await searchPlants(value);
 
 
             setPlants(results);
 
 
-        } catch(error) {
+        }
+        catch(error){
 
-
-            console.error(
-                "Plant search error:",
-                error
-            );
-
+            console.error(error);
 
             setPlants([]);
 
-
-        } finally {
+        }
+        finally{
 
             setLoading(false);
 
@@ -94,69 +95,26 @@ function Search() {
 
 
 
-    useEffect(() => {
+    useEffect(()=>{
 
 
-        async function initialLoad() {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        loadPlants("Monstera deliciosa");
 
 
-            try {
-
-                setLoading(true);
-
-
-                const results = await searchPlants(
-                    "Monstera deliciosa"
-                );
-
-
-                setPlants(results);
-
-
-            } catch(error) {
-
-
-                console.error(
-                    "Initial loading error:",
-                    error
-                );
-
-
-                setPlants([]);
-
-
-            } finally {
-
-                setLoading(false);
-
-            }
-
-        }
-
-
-
-        initialLoad();
-
-
-    }, []);
+    },[]);
 
 
 
 
 
-
-
-    function handleSearch(e) {
-
+    function handleSearch(e){
 
         e.preventDefault();
 
 
-        if(!query.trim()) {
-
+        if(!query.trim())
             return;
-
-        }
 
 
         loadPlants(query);
@@ -167,173 +125,253 @@ function Search() {
 
 
 
-
-
-
     return (
 
-        <main className={styles.searchPage}>
+
+        <main className={styles.page}>
 
 
-            <section className={styles.header}>
+            <img
+                src={monstera}
+                className={styles.backgroundPlant}
+                alt=""
+            />
 
 
-                <div className={styles.topBar}>
+            <div className={styles.blurOne}></div>
+            <div className={styles.blurTwo}></div>
 
-                    <button
-                        className={styles.backButton}
-                        onClick={() => navigate("/dashboard")}
+
+
+
+
+            <aside className={styles.sidebar}>
+
+
+                <Brand />
+
+
+                <nav>
+
+
+                    <Link to="/dashboard">
+                        <FiHome/>
+                        Dashboard
+                    </Link>
+
+
+
+                    <Link
+                        className={styles.active}
+                        to="/search"
                     >
-                        ← Back to Dashboard
-                    </button>
-
-                </div>
-
-
-                <h1>
-                    Explore Plants
-                </h1>
-
-
-                <p>
-                    Discover plants and find your next green companion.
-                </p>
+                        <FiSearch/>
+                        Discover
+                    </Link>
 
 
 
-                <form
-                    className={styles.searchBox}
-                    onSubmit={handleSearch}
-                >
-
-                    <input
-                        type="text"
-                        placeholder="Search for a plant..."
-                        value={query}
-                        onChange={(e) =>
-                            setQuery(e.target.value)
-                        }
-                    />
-
-                    <button type="submit">
-                        Search
-                    </button>
-
-                </form>
+                    <Link to="/plants">
+                        <FiGrid/>
+                        My Plants
+                    </Link>
 
 
-            </section>
+
+                    <Link to="/reminders">
+                        <FiDroplet/>
+                        Reminders
+                    </Link>
+
+
+
+                    <Link to="/profile">
+                        <FiUser/>
+                        Profile
+                    </Link>
+
+
+                </nav>
+
+
+            </aside>
 
 
 
 
 
-            <section className={styles.popular}>
 
-                <h2>
-                    Popular Plants
-                </h2>
 
-                <div className={styles.tags}>
+            <section className={styles.content}>
 
-                    {
-                        popularPlants.map((plant) => (
 
-                            <button
-                                key={plant.name}
-                                onClick={() => {
-
-                                    setQuery(plant.search);
-
-                                    loadPlants(plant.search);
-
-                                }}
-                            >
-
-                                {plant.name}
-
-                            </button>
-
-                        ))
-                    }
-
-                </div>
-
-            </section>
+                <section className={styles.hero}>
 
 
 
+                    <h1>
+                        Discover new plants
+                    </h1>
 
 
-            {
-                loading && (
-
-                    <p className={styles.loading}>
-                        Searching plants...
+                    <p className={styles.subtitle}>
+                        Search for plants and learn more about your next green companion.
                     </p>
 
-                )
-            }
+
+
+                    <form
+                        className={styles.searchBox}
+                        onSubmit={handleSearch}
+                    >
+
+
+                        <input
+                            type="text"
+                            placeholder="Search plants..."
+                            value={query}
+                            onChange={(e)=>setQuery(e.target.value)}
+                        />
+
+
+                        <button>
+                            Search
+                        </button>
+
+
+                    </form>
+
+
+                </section>
 
 
 
 
 
-            {
-                !loading && plants.length > 0 && (
 
-                    <section className={styles.results}>
+                <section className={styles.section}>
 
-                        <h2>
-                            Plant Results
-                        </h2>
+
+                    <h2>
+                        Popular Plants
+                    </h2>
+
+
+                    <div className={styles.tags}>
+
+
+                        {
+                            popularPlants.map((plant)=>(
+
+                                <button
+
+                                    key={plant.name}
+
+                                    onClick={()=>{
+
+                                        setQuery(plant.search);
+
+                                        loadPlants(plant.search);
+
+                                    }}
+
+                                >
+
+                                    {plant.name}
+
+                                </button>
+
+                            ))
+                        }
+
+
+                    </div>
+
+
+                </section>
+
+
+
+
+
+
+
+
+                <section className={styles.section}>
+
+
+                    <h2>
+                        Plant Results
+                    </h2>
+
+
+
+                    {
+                        loading &&
+
+                        <p className={styles.message}>
+                            Searching plants...
+                        </p>
+                    }
+
+
+
+
+
+                    {
+                        !loading &&
+                        plants.length > 0 &&
+
 
                         <div className={styles.plantGrid}>
 
-                            {
-                                plants.map((plant) => (
 
-                                    <PlantCard
+                            {
+                                plants.map((plant)=>(
+
+                                   <PlantCard
                                         key={plant.pageid}
                                         plant={plant}
+                                        isSaved={false}
                                     />
 
                                 ))
                             }
 
+
                         </div>
 
-                    </section>
 
-                )
-            }
+                    }
 
 
 
 
+                    {
+                        searched &&
+                        !loading &&
+                        plants.length === 0 &&
 
-            {
-                searched &&
-                !loading &&
-                plants.length === 0 && (
+                        <div className={styles.message}>
 
-                    <section className={styles.noResults}>
+                            No plants found.
 
-                        <h2>
-                            No plants found
-                        </h2>
+                        </div>
 
-                        <p>
-                            Try searching for another plant.
-                        </p>
+                    }
 
-                    </section>
 
-                )
-            }
+
+                </section>
+
+
+
+            </section>
+
 
 
         </main>
+
 
     );
 
