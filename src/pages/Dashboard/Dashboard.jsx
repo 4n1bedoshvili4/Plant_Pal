@@ -45,10 +45,12 @@ function Dashboard() {
 
         await logout();
 
-        window.location.hash = "#/login";
+        window.location.href =
+            window.location.origin +
+            window.location.pathname +
+            "#/login";
 
     }
-
 
 
 
