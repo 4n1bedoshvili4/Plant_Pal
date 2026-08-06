@@ -34,17 +34,6 @@
 
     z-index: 2;
 
-
-    background: rgba(255,255,255,0.7);
-
-    backdrop-filter: blur(25px);
-
-    -webkit-backdrop-filter: blur(25px);
-
-
-    border: 1px solid rgba(255,255,255,0.5);
-
-
     box-shadow:
 
         0 25px 70px rgba(0,0,0,0.12);
