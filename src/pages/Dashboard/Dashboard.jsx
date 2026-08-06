@@ -237,7 +237,7 @@ function Dashboard() {
 
                         Reminders
 
-                    </Link>
+                    </Link>git push
 
 
 
