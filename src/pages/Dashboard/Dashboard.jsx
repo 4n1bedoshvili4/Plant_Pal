@@ -45,7 +45,7 @@ function Dashboard() {
 
         await logout();
 
-        window.location.href="/login";
+        window.location.hash = "#/login";
 
     }
 
