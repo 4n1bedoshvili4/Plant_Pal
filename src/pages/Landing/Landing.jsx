@@ -4,9 +4,19 @@ import Footer from "../../components/Footer/Footer";
 import About from "../../components/About/About";
 import styles from "./Landing.module.css";
 import { Link } from "react-router-dom";
+import landingPlant from "../../assets/landing.jpg";
 
 function Landing() {
 
+    function scrollToSection(id, event) {
+
+        event.preventDefault();
+
+        document.getElementById(id)?.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
 
     return (
 
@@ -71,6 +81,7 @@ function Landing() {
                     <a
                         href="#about"
                         className={styles.secondary}
+                        onClick={(event) => scrollToSection("about", event)}
                     >
 
                         Learn More
@@ -93,14 +104,10 @@ function Landing() {
 
                     <div className={styles.imageCard}>
 
-
-                        <img
-
-                            src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b"
-
-                            alt="Indoor plant"
-
-                        />
+                    <img
+                        src={landingPlant}
+                        alt="Indoor plant"
+                    />
 
 
                     </div>

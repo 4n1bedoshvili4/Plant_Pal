@@ -4,7 +4,16 @@ import styles from "./PublicNavbar.module.css";
 
 
 function PublicNavbar() {
+    
+    function scrollToSection(id, event) {
 
+        event.preventDefault();
+
+        document.getElementById(id)?.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
 
     return (
 
@@ -17,12 +26,18 @@ function PublicNavbar() {
             <div className={styles.links}>
 
 
-                <a href="#about">
+                <a
+                    href="#about"
+                    onClick={(event) => scrollToSection("about", event)}
+                >
                     About
                 </a>
 
 
-                <a href="#features">
+                <a
+                    href="#features"
+                    onClick={(event) => scrollToSection("features", event)}
+                >
                     Features
                 </a>
 
